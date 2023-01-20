@@ -38,6 +38,7 @@ def generate_password():
 
 
 def copy(str):
+    root.clipboard_clear()
     root.clipboard_append(str)
 
 
