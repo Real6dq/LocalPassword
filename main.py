@@ -109,6 +109,6 @@ password_output = tk.Label(root, text="")
 password_output.grid(row=7, column=0, columnspan=2)
 
 status_label = tk.Label(root, text="")
-status_label.grid(row=7, column=0, columnspan=2)
+status_label.grid(row=8, column=0, columnspan=2)
 
 root.mainloop()
