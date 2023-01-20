@@ -5,7 +5,7 @@ This project is a simple cloudless password generator that includes a GUI :)
 ## Requirements
 - Python 3
 - Tkinter 
-- ctypes (windows only)
+- ctypes (windows only, installed by default)
 
 ## Pre-build
 - Go to releases, install the first one.
