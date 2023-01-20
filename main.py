@@ -17,10 +17,10 @@ def shuffle(str1, str2):
 
 def generate_password():
     length = int(length_entry.get())
-    name = name_entry.get()
-    password = password_entry.get()
-    birthdate = birthdate_entry.get()
-    website = website_entry.get()
+    name = name_entry.get().lower()
+    password = password_entry.get().lower()
+    birthdate = birthdate_entry.get().lower()
+    website = website_entry.get().lower()
 
     combined = str(length) + name + birthdate + website + str(length)
     sha = hashlib.sha256()
@@ -35,6 +35,7 @@ def generate_password():
     password_output.config(text=password)
     copy(password)
     status_label.config(text="Password copied to clipboard!")
+
 
 
 # I found this code on github, credits to whoever made it, I forgot to see, sorry.
