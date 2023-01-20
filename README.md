@@ -2,6 +2,12 @@
 
 This project is a simple cloudless password generator that includes a GUI :)
 
+## Featuers
+- Impossible to find the master password.
+- Cloudless, doesn't get saved anywhere.
+- Secure, uses SHA256 & shuffles the password well.
+- Open source, anyone could modify it, it's MIT license.
+
 ## Requirements
 - Python 3 (Installed by default)
 - Tkinter (Installed by default)
