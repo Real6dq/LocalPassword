@@ -1,6 +1,7 @@
 import tkinter as tk
 import hashlib
-import ctypes
+
+root = tk.Tk()
 
 
 def shuffle(str1, str2):
@@ -26,7 +27,6 @@ def generate_password():
     sha = hashlib.sha256()
     sha.update(combined.encode())
     secretOne = str(sha.hexdigest())
-
     combined = str(length)+website+password+birthdate+str(length)
     sha = hashlib.sha256()
     sha.update(combined.encode())
@@ -37,23 +37,11 @@ def generate_password():
     status_label.config(text="Password copied to clipboard!")
 
 
-
-# I found this code on github, credits to whoever made it, I forgot to see, sorry.
 def copy(str):
-    CF_UNICODETEXT = 13
-    GMEM_MOVEABLE = 0x0002
-    ctypes.windll.user32.OpenClipboard(None)
-    ctypes.windll.user32.EmptyClipboard()
-    hCd = ctypes.windll.kernel32.GlobalAlloc(GMEM_MOVEABLE, len(str)*2+2)
-    pchData = ctypes.windll.kernel32.GlobalLock(hCd)
-    ctypes.cdll.msvcrt.wcscpy(ctypes.c_wchar_p(pchData), str)
-    ctypes.windll.kernel32.GlobalUnlock(hCd)
-    ctypes.windll.user32.SetClipboardData(CF_UNICODETEXT, hCd)
-    ctypes.windll.user32.CloseClipboard()
+    root.clipboard_append(str)
 
 
-root = tk.Tk()
-root.title("Password Generator")
+root.title("LocalPassword")
 
 length_label = tk.Label(root, text="Length:")
 length_label.grid(row=0, column=0)
