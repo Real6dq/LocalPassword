@@ -1,7 +1,9 @@
 import tkinter as tk
 import hashlib
+import random
 
 root = tk.Tk()
+special_chars = "!@#$%^&*"
 
 
 def shuffle(str1, str2):
@@ -14,6 +16,22 @@ def shuffle(str1, str2):
     else:
         shuffled += str2[min_length:]
     return shuffled
+
+
+def fixed_shuffle(text, seed):
+    random.seed(seed)
+    chars = list(text)
+    random.shuffle(chars)
+    return ''.join(chars)
+
+
+def shuffle_and_place(text, special_chars, seed):
+    text += special_chars
+    shuffled_text = fixed_shuffle(text, seed)
+    new_string = ""
+    for i in range(len(text)):
+        new_string += shuffled_text[i % len(shuffled_text)]
+    return new_string
 
 
 def generate_password():
@@ -31,7 +49,15 @@ def generate_password():
     sha = hashlib.sha256()
     sha.update(combined.encode())
     secretTwo = str(sha.hexdigest())[0:32]
-    password = shuffle(secretOne, secretTwo+secretTwo)[0:length]
+
+    password = shuffle(secretOne, secretTwo+secretTwo)[0:length]  # V1
+
+    if include_special_chars.get():
+        password = shuffle_and_place(
+            password,  special_chars, len(password))  # Special chars
+
+        password = password[0:length]  # Making sure the length is correct
+
     password_output.config(text=password)
     copy(password)
     status_label.config(text="Password copied to clipboard!")
@@ -69,12 +95,18 @@ website_label.grid(row=4, column=0)
 website_entry = tk.Entry(root)
 website_entry.grid(row=4, column=1)
 
+include_special_chars = tk.BooleanVar()
+include_special_chars.set(True)
+special_chars_check = tk.Checkbutton(
+    root, text="Include special characters", variable=include_special_chars)
+special_chars_check.grid(row=6, column=0, columnspan=2)
+
 generate_button = tk.Button(root, text="Generate", command=generate_password)
 generate_button = tk.Button(root, text="Generate", command=generate_password)
 generate_button.grid(row=5, column=0, columnspan=2)
 
 password_output = tk.Label(root, text="")
-password_output.grid(row=6, column=0, columnspan=2)
+password_output.grid(row=7, column=0, columnspan=2)
 
 status_label = tk.Label(root, text="")
 status_label.grid(row=7, column=0, columnspan=2)
