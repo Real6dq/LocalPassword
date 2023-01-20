@@ -6,10 +6,11 @@ This project is a simple cloudless password generator that includes a GUI :)
 - Impossible to find the master password.
 - Cloudless, doesn't get saved anywhere.
 - Secure, uses SHA256 & shuffles the password well.
+- Poor Android Support but it works!
 - Open source, anyone could modify it, it's MIT license.
 
 ## Requirements
-- Python 3 (Installed by default)
+- Python 3
 - Tkinter (Installed by default)
 
 ## Pre-built executable
